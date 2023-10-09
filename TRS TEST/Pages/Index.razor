@@ -1,0 +1,431 @@
+﻿@page "/"
+
+
+<MudGrid>
+    <MudItem xs="6" md="4">
+        <MudPaper Class="pa-5 mb-5">
+
+        <MudNumericField T="double" ValueChanged="@(x => OnValueChange(x,1))" Class="mb-3" Adornment="Adornment.End" AdornmentText="heures" AdornmentColor="Color.Primary" Value="TempsTotal" Label="Temps total" Variant="Variant.Text"  />
+        <MudNumericField T="double" ValueChanged="@(x => OnValueChange(x,2))" Class="mb-3" Adornment="Adornment.End" AdornmentText="heures" AdornmentColor="Color.Primary" Value="TempsOuverture" Label="Temps d'ouverture" Variant="Variant.Text"  />
+        <MudNumericField T="double" ValueChanged="@(x => OnValueChange(x,3))" Class="mb-3" Adornment="Adornment.End" AdornmentText="heures" AdornmentColor="Color.Primary" Value="TempsArretPrevu" Label="Temps d'arret prévu" Variant="Variant.Text"  />
+        <MudNumericField T="double" ReadOnly="true" Class="mb-3" Adornment="Adornment.End" AdornmentText="heures" AdornmentColor="Color.Primary" Value="TempsRequis" Label="Temps requis" Variant="Variant.Text"  />
+        <MudNumericField T="double" ValueChanged="@(x => OnValueChange(x,4))" Class="mb-3" Adornment="Adornment.End" AdornmentText="heures" AdornmentColor="Color.Primary" Value="TempsArret" Label="Temps d'arret" Variant="Variant.Text"  />
+        <MudNumericField T="double" ReadOnly="true" Class="mb-3" Adornment="Adornment.End" AdornmentText="heures" AdornmentColor="Color.Primary" Value="TempsFonctionnement" Label="Temps de fonctionnement" Variant="Variant.Text"  />
+        </MudPaper>
+        <MudPaper Class="pa-5 mb-5">
+
+        <MudNumericField T="double" ValueChanged="@(x => OnValueChange(x,5))" Class="mb-3" Value="CadenceReference" AdornmentColor="Color.Primary" Adornment="Adornment.End" AdornmentText="pièces/h" Label="Cadence de référence" Variant="Variant.Text"  />
+        <MudNumericField T="double" ValueChanged="@(x => OnValueChange(x,6))" Class="mb-3" Adornment="Adornment.End" AdornmentText="pièces" AdornmentColor="Color.Primary" Value="QuantiteRealise" Label="Quantité réalisé" Variant="Variant.Text"  />
+        <MudNumericField T="double" ValueChanged="@(x => OnValueChange(x,7))" Class="mb-3" Adornment="Adornment.End" AdornmentText="pièces" AdornmentColor="Color.Primary" Value="QuantiteNonConforme" Label="Quantité non-conforme" Variant="Variant.Text"  />
+        <MudNumericField T="double" ReadOnly="true" Class="mb-3" Adornment="Adornment.End" AdornmentText="pièces" AdornmentColor="Color.Primary" @bind-Value="QuantiteAccepte" Label="Quantité acceptée" Variant="Variant.Text"  />
+        </MudPaper>
+
+        <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles" Style="width:50%;">
+            <ButtonTemplate>
+                <MudButton HtmlTag="label"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           StartIcon="@Icons.Material.Filled.CloudUpload"
+                           for="@context">
+                    Charger Fichier ".Csv"
+                </MudButton>
+            </ButtonTemplate>
+        </MudFileUpload>
+
+    </MudItem>
+    <MudItem xs="6" md="4">
+        <MudPaper Class="pa-5 mb-5">
+        <MudNumericField T="double" ReadOnly="true" Class="mb-3" Adornment="Adornment.Start" AdornmentIcon="Material" AdornmentText="%" AdornmentColor="Color.Primary" @bind-Value="TauxDisponibiliteOperationnelle" Label="Taux de disponoibilité opérationnelle" Variant="Variant.Text"  />
+        <MudNumericField T="double" ReadOnly="true" Class="mb-3" Adornment="Adornment.Start" AdornmentText="%" AdornmentColor="Color.Primary" @bind-Value="TauxPerformance" Label="Taux de performance" Variant="Variant.Text"  />
+        <MudNumericField T="double" ReadOnly="true" Class="mb-3" Adornment="Adornment.Start" AdornmentText="%" AdornmentColor="Color.Primary" @bind-Value="TauxQualite" Label="Taux de qualité" Variant="Variant.Text"  />
+        <MudNumericField T="double" ReadOnly="true" Class="mb-3" Adornment="Adornment.Start" AdornmentText="%" AdornmentColor="Color.Primary" @bind-Value="TRS" Label="TRS" Variant="Variant.Text"  />
+        <MudNumericField T="double" ReadOnly="true" Class="mb-3" Adornment="Adornment.Start" AdornmentText="%" AdornmentColor="Color.Primary" @bind-Value="TRG" Label="TRG" Variant="Variant.Text"  />
+        <MudNumericField T="double" ReadOnly="true" Class="mb-3" Adornment="Adornment.Start" AdornmentText="%" AdornmentColor="Color.Primary" @bind-Value="TRE" Label="TRE" Variant="Variant.Text"  />
+        </MudPaper>
+        <MudPaper Class="pa-5 mb-5">
+        <MudNumericField T="double" ReadOnly="true" Class="mb-3" Adornment="Adornment.End" AdornmentText="heures" AdornmentColor="Color.Primary" @bind-Value="TempsNet" Label="Temps net" Variant="Variant.Text"  />
+        <MudNumericField T="double" ReadOnly="true" Class="mb-3" Adornment="Adornment.End" AdornmentText="heures" AdornmentColor="Color.Primary" @bind-Value="TempsEcartCadence" Label="Temps écart de cadence" Variant="Variant.Text"  />
+        <MudNumericField T="double" ReadOnly="true" Class="mb-3" Adornment="Adornment.End" AdornmentText="heures" AdornmentColor="Color.Primary" @bind-Value="TempsUtile" Label="Temps utile" Variant="Variant.Text"  />
+        <MudNumericField T="double" ReadOnly="true" Class="mb-3" Adornment="Adornment.End" AdornmentText="heures" AdornmentColor="Color.Primary" @bind-Value="TempsNonQalite" Label="Temps de non qualité" Variant="Variant.Text"  />
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" md="4">
+
+            <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-3" Class="mb-5">
+                <MudTabPanel Text="TRS">
+                    @if(dataRadar != null)
+                    {
+                            <Gauge @ref="chartTRS" Config="GaugeTRS" />
+
+                    }
+                </MudTabPanel>
+                <MudTabPanel Text="TRG">
+                    @if (data != null)
+                    {
+                            <Gauge @ref="chartTRG" Config="GaugeTRG" />
+
+                    }
+                </MudTabPanel>
+                <MudTabPanel Text="TRE">
+                    @if (dataQuantite != null)
+                    {
+                            <Gauge @ref="chartTRE" Config="GaugeTRE" />
+ 
+                    }
+                    </MudTabPanel>
+  
+            </MudTabs>
+
+        <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-3" Class="mb-5">
+                <MudTabPanel Text="Rendement">
+                    @if(dataRadar != null){
+                     <Radar @ref="chart1"  Data="dataRadar"  Config="configRadar"/>
+                    }
+                </MudTabPanel>
+                <MudTabPanel Text="Temps">
+                    @if (data != null)
+                    {
+                    <MudChart ChartType="ChartType.Donut" Width="300px" Height="300px" InputData="@data" InputLabels="@labels">
+                                <CustomGraphics>
+		                       <text class="donut-inner-text" x="47%" y="35%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="2">Temps d'ouverture</text>
+		                       <text class="donut-inner-text" x="47%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@data.Sum().ToString()</text>
+	                    </CustomGraphics>
+                    </MudChart>
+                    }
+                </MudTabPanel>
+                <MudTabPanel Text="Quantité">
+                    @if (dataQuantite != null)
+                    {
+                     <MudChart ChartType="ChartType.Donut" Width="300px" Height="300px" InputData="@dataQuantite" InputLabels="@labelQuantite">
+                            <CustomGraphics>
+		                       <text class="donut-inner-text" x="47%" y="35%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="2">Quantité Réalisée</text>
+		                       <text class="donut-inner-text" x="47%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@dataQuantite.Sum().ToString()</text>
+	                    </CustomGraphics>
+                    </MudChart>
+                    }
+                    </MudTabPanel>
+  
+            </MudTabs>
+
+            @*Second TAB*@
+
+
+
+        <MudPaper Class="pa-5 mb-2">
+            <MudText Typo="Typo.h6">Taux de rendement synthétique</MudText>
+            <MudText Typo="Typo.h4" Color="Color.Primary">@TRS%</MudText>
+            <MudProgressLinear Color="Color.Primary" Size="Size.Small" @bind-Value="TRS" Class="my-3">
+
+            </MudProgressLinear>
+ 
+            <MudText Typo="Typo.h6">Taux de rendement global</MudText>
+            <MudText Typo="Typo.h4" Color="Color.Secondary">@TRG%</MudText>
+            <MudProgressLinear Color="Color.Secondary" Size="Size.Small" @bind-Value="TRG" Class="my-3">
+
+            </MudProgressLinear>
+
+            <MudText Typo="Typo.h6">Taux de rendement économique</MudText>
+            <MudText Typo="Typo.h4" Color="Color.Success">@TRE%</MudText>
+            <MudProgressLinear Color="Color.Success" Size="Size.Small" @bind-Value="TRE" Class="my-3">
+
+            </MudProgressLinear>
+        </MudPaper>
+
+         
+        
+        
+
+    </MudItem>
+
+</MudGrid>
+
+
+
+@code{
+    public double TempsTotal { get; set; }
+    public double TempsOuverture { get; set; }
+    public double TempsArretPrevu { get; set; }
+    public double TempsRequis { get; set; }
+    public double TempsArret { get; set; }
+    public double TempsFonctionnement { get; set; }
+    public double CadenceReference { get; set; }
+    public double QuantiteRealise { get; set; }
+    public double QuantiteNonConforme { get; set; }
+    public double QuantiteAccepte { get; set; }
+    public double TauxDisponibiliteOperationnelle { get; set; }
+    public double TauxPerformance { get; set; }
+    public double TauxQualite { get; set; }
+    public double TRS { get; set; }
+    public double TRG { get; set; }
+    public double TRE { get; set; }
+    public double TempsNet { get; set; }
+    public double TempsEcartCadence { get; set; }
+    public double TempsUtile { get; set; }
+    public double TempsNonQalite { get; set; }
+    public string[] labels = { "Fonctionement", "Arret Prévu", "Arret Non Prévu" };
+    public string[] labelQuantite = { "Acceptée", "Non Conforme" };
+    public double[]? data;
+    public double[]? dataQuantite;
+    public object[] dataRadar;
+    public RadarConfig configRadar;
+    public GaugeConfig GaugeTRS;
+    public GaugeConfig GaugeTRG;
+    public GaugeConfig GaugeTRE;
+    public IChartComponent? chart1;
+    public IChartComponent? chartTRS;
+    public IChartComponent? chartTRG;
+    public IChartComponent? chartTRE;
+    IList<IBrowserFile> files = new List<IBrowserFile>();
+    private void UploadFiles(IBrowserFile file)
+    {
+        files.Add(file);
+        //TODO upload the files to the server
+    }
+
+    private void OnValueChange(double x, int value)
+    {
+        switch (value)
+        {
+            case 1 : TempsTotal = x; break;
+            case 2 : TempsOuverture = x; break;
+            case 3 : TempsArretPrevu = x; break;
+            case 4 : TempsArret = x; break;
+            case 5 : CadenceReference = x; break;
+            case 6 : QuantiteRealise = x; break;
+            case 7 : QuantiteNonConforme = x; break;
+            default : break;
+        }
+        Calculate();
+    }
+
+    private void Calculate()
+    {
+        TempsRequis = TempsOuverture - TempsArretPrevu;
+        TempsFonctionnement = TempsRequis - TempsArret;
+        QuantiteAccepte = QuantiteRealise - QuantiteNonConforme;
+        if (TempsRequis > 0) TauxDisponibiliteOperationnelle =  Math.Round((TempsFonctionnement * 100) / TempsRequis,1,MidpointRounding.ToEven);
+        if (CadenceReference > 0) { TempsNet =  Math.Round(QuantiteRealise / CadenceReference,1,MidpointRounding.ToEven); TempsNonQalite = Math.Round(QuantiteNonConforme / CadenceReference,1,MidpointRounding.ToEven); }
+        if (TempsFonctionnement > 0 ) TauxPerformance =  Math.Round( TempsNet / TempsFonctionnement * 100,1,MidpointRounding.ToEven) ; 
+        if (QuantiteRealise > 0 ) TauxQualite = Math.Round( QuantiteAccepte / QuantiteRealise * 100,1,MidpointRounding.ToEven) ; 
+        TRS =  Math.Round(TauxDisponibiliteOperationnelle * TauxPerformance * TauxQualite /10000,1,MidpointRounding.ToEven) ;
+        TempsEcartCadence = TempsFonctionnement - TempsNet;
+        TempsUtile = TempsNet - TempsNonQalite; 
+        TRG =  Math.Round(TempsUtile / TempsOuverture * 100,1,MidpointRounding.AwayFromZero) ; 
+        TRE =  Math.Round(TempsUtile / TempsTotal * 100 ,1,MidpointRounding.AwayFromZero);
+        data = new double[] { TempsFonctionnement, TempsArretPrevu,TempsArret };
+        dataQuantite = new double[] { QuantiteAccepte, QuantiteNonConforme };
+        if (TRS > 0)
+        {
+            dataRadar = new object[]
+        {
+        new
+        {
+            item = "Taux Qualité",
+            score = TauxQualite
+        },
+        new
+        {
+            item = "Taux Disponibilté",
+            score = TauxDisponibiliteOperationnelle
+        },
+        new
+        {
+            item = "TRS",
+            score = TRS
+        },
+        new
+        {
+            item = "TRE",
+            score = TRE
+        },
+        new
+        {
+            item = "TRG",
+            score = TRG
+        },
+
+        new
+        {
+            item = "Taux performance",
+            score = TauxPerformance
+        },
+
+            };
+
+
+
+            configRadar = new RadarConfig
+        {
+            Title = new Title
+            {
+                Visible = true,
+                Text = "Text"
+            },
+            AutoFit = true, 
+            YAxis = new Axis {
+             MaxLimit = 100,
+             Min = 0
+            },
+            ForceFit= true,
+            XField = "item",
+            YField = "score",
+            RadiusAxis = new ValueAxis
+            {
+                Grid = new BaseAxisGrid
+                {
+                    AlternateColor = new[] { "rgba(0, 0, 0, 0.04)", null }
+                }
+            },
+            Area = new RadarViewConfigArea
+            {
+                Visible = false
+            },
+            Point = new RadarViewConfigPoint
+            {
+                Visible = true
+            },
+            Color = "#594ae2",
+            };
+            chart1?.ChangeData(dataRadar);
+
+            // ------ Gauge Config -------- 
+
+            GaugeTRS = new GaugeConfig()
+    {
+        Height = 350,
+        Percent = new decimal(TRS/100),
+        Radius = 0.8,
+        Range = new GaugeRange
+        {
+            Ticks = new[] { 0.0, 1.0 / 4.0, 2.0/4.0, 3.0 / 4.0, 1.0 },
+            Color = new[] { "#F4664A", "#FAAD14", "#30FF78", "#30BF78" }
+        },
+        Indicator = new GaugeIndicator()
+        {
+            Pointer = new GaugeIndicatorStyle
+            {
+                Style = new GaugeStyle
+                {
+                    Stroke = "#303030"
+                    
+                }
+            },
+            Pin = new GaugeIndicatorStyle
+            {
+                Style = new GaugeStyle
+                {
+                    Stroke = "#303030"
+                }
+            }
+        },
+        Statistic = new GaugeStatistic
+        {
+            Content = new GaugeStatisticStyle
+            {
+                Style = new TextStyle
+                {
+                    FontSize = "36px",
+                    LineHeight = "36px",
+                },
+            }
+        },
+    };
+
+            // -------------- TRG ------------- 
+            GaugeTRG = new GaugeConfig()
+    {
+        Height= 350,
+        Percent = new decimal(TRG/100),
+        Radius = 0.8,
+        Range = new GaugeRange
+        {
+            Ticks = new[] { 0.0, 1.0 / 4.0, 2.0/4.0, 3.0 / 4.0, 1.0 },
+            Color = new[] { "#F4664A", "#FAAD14", "#30FF78", "#30BF78" }
+        },
+        Indicator = new GaugeIndicator()
+        {
+            Pointer = new GaugeIndicatorStyle
+            {
+                Style = new GaugeStyle
+                {
+                    Stroke = "#303030"
+                }
+            },
+            Pin = new GaugeIndicatorStyle
+            {
+                Style = new GaugeStyle
+                {
+                    Stroke = "#303030"
+                }
+            }
+        },
+        Statistic = new GaugeStatistic
+        {
+            Content = new GaugeStatisticStyle
+            {
+                Style = new TextStyle
+                {
+                    FontSize = "36px",
+                    LineHeight = "36px",
+                },
+            }
+        },
+    };
+
+            // ------------ TRE ------------
+
+            GaugeTRE = new GaugeConfig()
+    {
+        Height = 350,
+        Percent = new decimal(TRE/100),
+        Radius = 0.8,
+        Range = new GaugeRange
+        {
+            Ticks = new[] { 0.0, 1.0 / 4.0, 2.0/4.0, 3.0 / 4.0, 1.0 },
+            Color = new[] { "#F4664A", "#FAAD14", "#30FF78", "#30BF78" }
+        },
+        Indicator = new GaugeIndicator()
+        {
+            Pointer = new GaugeIndicatorStyle
+            {
+                Style = new GaugeStyle
+                {
+                    Stroke = "#303030"
+                }
+            },
+            Pin = new GaugeIndicatorStyle
+            {
+                Style = new GaugeStyle
+                {
+                    Stroke = "#303030"
+                }
+            }
+        },
+        Statistic = new GaugeStatistic
+        {
+            Content = new GaugeStatisticStyle
+            {
+                Style = new TextStyle
+                {
+                    FontSize = "36px",
+                    LineHeight = "36px",
+                },
+            }
+        },
+    };
+
+            chartTRS?.ChangeData(new decimal(TRS / 100));
+            chartTRG?.ChangeData(new decimal(TRG / 100));
+            chartTRE?.ChangeData(new decimal(TRE / 100));
+
+        }
+
+    }
+
+    
+    // ------------- Gauge Config --------------
+
+
+
+
+}
