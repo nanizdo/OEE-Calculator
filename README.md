@@ -7,4 +7,4 @@ MudBlazor 6.8.0
 AntDesign.Charts 0.3.1 
 ```
 # Output Result 
-![Output Result](/TRS TEST/src/OEE.gif)
+![output gif](TRS TEST/src/OEE.gif)
